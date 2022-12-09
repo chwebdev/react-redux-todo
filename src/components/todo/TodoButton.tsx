@@ -6,13 +6,14 @@ const TodoButton: FC = () => {
 	const [value, setValue] = useState<string>('')
 	const { add } = useActions()
 
-	const addTodo = () => {
+	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
 		add(value)
 		setValue('')
 	}
 
 	return (
-		<Form role='form' aria-label='button-add'>
+		<Form role='form' aria-label='button-add' onSubmit={onSubmit}>
 			<Form.Group className='d-flex'>
 				<Form.Control
 					onChange={e => setValue(e.target.value)}
@@ -22,10 +23,9 @@ const TodoButton: FC = () => {
 					id='todo-button-field'
 				/>
 				<Button
-					onClick={addTodo}
 					className='ms-3'
 					variant='primary'
-					type='button'
+					type='submit'
 					id='todo-button-add'
 					disabled={!value}
 				>

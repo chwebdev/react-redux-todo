@@ -1,6 +1,7 @@
 {
   "name": "react-redux-todo",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "author": "Kirill Chaklidi <b@rubble.com> (https://github.com/chwebdev/react-redux-todo)",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
