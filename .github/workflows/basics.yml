@@ -1,0 +1,30 @@
+name: GitHub-Actions-Basics
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-varsion: [17.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install modules
+        run: npm install
+      - name: Build project
+        run: npm run build
+      - name: Running Unit tests
+        run: npm run test:ciunit
+      - name: Start server
+        run: npm run start:ci
+      - name: Running E2E tests
+        run: npm run test:cie2e
+      - name: Lint code
+        run: npm run lint
