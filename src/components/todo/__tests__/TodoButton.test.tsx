@@ -44,13 +44,15 @@ describe('Initializing TodoButton', () => {
 		user.setup()
 		renderProvider(<TodoButton />)
 		const button = screen.getByRole('button')
+		const field = screen.getByRole('textbox')
 
+		await user.type(field, '{enter}')
 		await user.click(button)
 
 		expect(mockAddFn).toBeCalledTimes(0)
 	})
 
-	test('Should add element if field not empty and after clear field', async () => {
+	test('Should add an element when pressing button and then erase the field', async () => {
 		user.setup()
 		renderProvider(<TodoButton />)
 		const button = screen.getByRole('button')
@@ -58,6 +60,17 @@ describe('Initializing TodoButton', () => {
 
 		await user.type(field, 'Task #1')
 		await user.click(button)
+
+		expect(mockAddFn).toBeCalledTimes(1)
+		expect(field).toHaveValue('')
+	})
+
+	test('Should add an element when pressing enter and then erase the field', async () => {
+		user.setup()
+		renderProvider(<TodoButton />)
+		const field = screen.getByRole('textbox')
+
+		await user.type(field, 'Task #1{enter}')
 
 		expect(mockAddFn).toBeCalledTimes(1)
 		expect(field).toHaveValue('')
