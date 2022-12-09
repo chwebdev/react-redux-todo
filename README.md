@@ -1,4 +1,4 @@
-# React Redux Todo 1.0.0
+# React Redux Todo 1.0.1
 
 You can:
 
